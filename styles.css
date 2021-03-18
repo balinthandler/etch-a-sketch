@@ -1,0 +1,19 @@
+body {
+  background-color: azure;
+  text-align: center;
+}
+
+#headerContainer {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-color: darkslategray;
+}
+
+.headerElement {
+  margin: 1em;
+  width: 100%;
+}
