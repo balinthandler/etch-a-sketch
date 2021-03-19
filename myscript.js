@@ -29,7 +29,7 @@ function createGrid(array) {
     }
 
   } 
-  coloring();
+  randomRGB();
 
 
 }
