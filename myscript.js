@@ -29,7 +29,7 @@ function createGrid(array) {
     }
 
   } 
-
+  coloring();
 
 
 }
@@ -45,5 +45,16 @@ btn.addEventListener('click', event => {
 
 
 // Random color generating for cells
-
-
+function randomRGB() {
+  let rgb = '';
+  for (let i = 0; i<3; i++){
+    if (i == 0) {
+      rgb += 'rgb(' + (Math.round(Math.random() * 255)) + ', ';
+    } else if (i == 1) {
+      rgb += (Math.round(Math.random() * 255)) + ', ';
+    } else if (i == 2) {
+      rgb += (Math.round(Math.random() * 255)) + ')';
+    }
+  }
+  console.log(rgb);
+}
