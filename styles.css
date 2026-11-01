@@ -15,6 +15,7 @@ body {
     margin: 25px;
     padding: 35px;
     border-radius: 30px;
+    box-shadow:3px 3px 10px brown;
 
 }
 
@@ -44,9 +45,11 @@ body {
     height:500px;
     background-color: antiquewhite;
     border: 1px solid brown;
+
     margin: 0px;
     flex: 0 1 500px;
-
+    box-shadow: inset;
+    box-shadow:3px 3px 10px brown inset;
 }
 
 .row {
@@ -57,7 +60,7 @@ body {
     align-items: flex-start;
 }
 .cell {
-    background-color: antiquewhite;
+
     border: 1px solid rgba(255, 200,150, 0.5);
     box-sizing: border-box;
 }
@@ -65,10 +68,13 @@ body {
 #inputContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     background-color: antiquewhite;
+    border: 1px solid brown;
     padding: 15px;
     width: 200px;
     margin-bottom:auto;
+    box-shadow:3px 3px 10px brown inset;
 }
 
 #inputTitle {
@@ -76,8 +82,24 @@ body {
     text-align: center;
 }
 
+input {
+    width: 150px;
+}
+
 
 #rangeInputText {
     font-size: 24px;
     text-align: center;
+}
+
+#cleanBtn {
+    font-size: 18px;
+    border: 1px solid darkred;
+    border-radius: 5px;
+    color:white;
+    font-weight: 500;
+    background-color: crimson;
+    width: 100px;
+    height: 35px;
+
 }
