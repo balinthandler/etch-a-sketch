@@ -15,12 +15,14 @@ body {
     margin: 25px;
     padding: 35px;
     border-radius: 30px;
-    box-shadow:3px 3px 10px brown;
+    box-shadow:15px 15px 35px brown;
 
 }
 
 #mainTitle {
-    font-size: 36px;
+    font-size: 52px;
+    font-style: italic;
+    font-weight: 800;
     color:rgb(255, 197, 51);
     text-align: center;
     margin-bottom: 25px;
@@ -28,7 +30,7 @@ body {
 }
 
 #tableAndInputContainer {
-    display: flex;;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: auto 0px;
@@ -92,14 +94,59 @@ input {
     text-align: center;
 }
 
-#cleanBtn {
-    font-size: 18px;
-    border: 1px solid darkred;
-    border-radius: 5px;
-    color:white;
-    font-weight: 500;
-    background-color: crimson;
-    width: 100px;
-    height: 35px;
+#buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 25px;
+    
+}
+#cleanBtn, .colorBtn{
 
+    font-size: 18px;
+    font-weight: 500;
+    width: 125px;
+    height: 50px;
+    border-radius: 5px;
+    transition-duration: 0.3s;
+    border: 1px solid gray;
+    box-shadow: 0px 2px white inset;
+    border: 1px solid darkred;
+    
+}
+
+.colorBtn {
+    color: crimson;
+    box-shadow: 0px 2px white inset;
+    
+}
+
+.colorBtn:hover {
+    background-color: white;
+}
+
+#colorBtn {
+    color: crimson;
+}
+
+#bwButton {
+    color: white;
+    background-color: rgb(51, 51, 51);
+    border: 1px solid black
+}
+
+#bwButton:hover {
+    background-color: rgb(95, 95, 95);
+}
+
+#cleanBtn {
+    color:crimson;
+}
+
+#cleanBtn:hover {
+    background-color: darkred;
+    color: white;
+}
+#cleanBtn:active {
+    background-color: rgb(77, 0, 0);
 }

@@ -35,13 +35,13 @@ function createSlider(size) {
     let inputContainer = document.querySelector("#inputContainer");
     inputContainer.appendChild(slider);
 
-    createInputText(size);
+    setSliderText(size);
 
 
 
 }
 
-function createInputText(number) {
+function setSliderText(number) {
     let inputText = document.querySelector("#rangeInputText")
     if (!inputText) {
         let inputText = document.createElement("p");
@@ -55,12 +55,12 @@ function createInputText(number) {
     }
 }
 
-function watchChange() {
+function setNewTable() {
     let slider = document.querySelector("#slider");
     let table = document.querySelector("#table");
 
     slider.addEventListener("input", () => {
-        createInputText(slider.value);
+        setSliderText(slider.value);
         table.replaceChildren();
         createGrid(slider.value);
     })
@@ -72,17 +72,35 @@ function drawOnTable() {
         e.preventDefault();
     })
 
-    table.addEventListener("mouseover", (event) => {
-        event.preventDefault();
 
+    table.addEventListener("mouseover", (event) => {
+        
+        
         if (event.buttons == 1) {
             let bgColor = event.target.style.backgroundColor;
+            let color = document.querySelector(".colorBtn").textContent;
+
             if (bgColor == "" && event.target.className === "cell") {
-                event.target.style.backgroundColor = randomRgb();
-            } else {
-                event.target.style.backgroundColor = shadeRgb(event.target.style.backgroundColor);
-                console.log("currentBG: "+ event.target.style.backgroundColor);
-                console.log("shadeBG: " + shadeRgb(event.target.style.backgroundColor));
+                switch(color) {
+                    case("COLOR"):
+                        event.target.style.backgroundColor = randomRgb();
+                        break;
+                    case("B&W"):
+                        event.target.style.backgroundColor = "rgba(0, 0, 0, 0.1)";
+                        break;
+                }
+            } else if (bgColor != "" && event.target.className === "cell") {
+                switch(color) {
+                    case("COLOR"):
+                        event.target.style.backgroundColor = 
+                            setColorAlpha(event.target.style.backgroundColor);
+                        break;
+                    case("B&W"):
+                        event.target.style.backgroundColor = 
+                            setColorAlpha(event.target.style.backgroundColor);
+                        break;
+                        
+                }
             }
         }
     })
@@ -95,42 +113,84 @@ function randomRgb() {
     return `rgba(${r}, ${g}, ${b}, 0.1)`;
 }
 
-function shadeRgb(rgbaString) {
+function setColorAlpha(rgbaString) {
     let arr = rgbaString.split(",");
-    let alpha = Number(arr[3].slice(1,-1));
-    
-    if (alpha < 1) {
-        alpha += 0.1;
+
+    if (arr.length > 3) {
+        let alpha = Number(arr[3].trimStart().slice(0,-1));
+        if (alpha < 1) {
+            alpha += 0.1;
+            arr[3] = " " + alpha + ")";
+        }
     }
-    
-    arr[3] = " " + alpha + ")";
-    
-    
     return(arr.join(","));
 }
 
-shadeRgb("rgba(233, 200, 200, 0.1)");
 
-function setCleanButton() {
+function setButtons() {
+
+    //Create & Apend Buttons 
+    //------------------------------------------------------------------
     let cleanBtn = document.createElement("button");
     cleanBtn.textContent = "CLEAN";
     cleanBtn.id = "cleanBtn";
+
+    let colorBtn = document.createElement("button");
+    colorBtn.textContent = "COLOR";
+    colorBtn.className = "colorBtn";
+    colorBtn.id = "colorBtn";
+
+
     
     let inputContainer = document.querySelector("#inputContainer");
-    inputContainer.append(cleanBtn);
+    let buttonsContainer = document.createElement("div");
+    buttonsContainer.id = "buttonsContainer";
 
+    buttonsContainer.append(colorBtn);
+    buttonsContainer.append(cleanBtn);
+
+
+    inputContainer.append(buttonsContainer);
+    //------------------------------------------------------------------
+    
+    
+    //Clean table with button click
+    //------------------------------------------------------------------
     let cells = document.querySelectorAll(".cell")
+    
     cleanBtn.addEventListener("click", () => {
         cells.forEach(cell => {
             cell.style.backgroundColor = ""
         });
     })
+    //------------------------------------------------------------------
+    
+    //Color Button event listeners
+    //------------------------------------------------------------------
+    setColor();
+
+    
+
+}
+
+function setColor() {
+    let pencilColor = document.querySelector(".colorBtn");
+
+    pencilColor.addEventListener("click", () => {
+        if (pencilColor.textContent === "COLOR") {
+            pencilColor.textContent = "B&W";
+            pencilColor.id = "bwButton";
+        } else {
+            pencilColor.textContent = "COLOR";
+            pencilColor.id = "colorBtn";
+        }
+    });
 }
 
 createGrid(50);
 createSlider(50);
-setCleanButton();
-watchChange();
+setButtons();
+setNewTable();
 drawOnTable();
 
 
